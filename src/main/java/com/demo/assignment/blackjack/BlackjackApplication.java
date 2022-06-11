@@ -11,9 +11,9 @@ public class BlackjackApplication {
 		SpringApplication.run(BlackjackApplication.class, args);
 		System.out.println("Welcome to BlackJack !!");
 		CardDeck playingCards = new CardDeck();
-		playingCards.generateFullDeck();
+		playingCards.generateCardDeck();
+		playingCards.shuffleDeck();
 		System.out.println(playingCards);
-
 	}
 
 }
