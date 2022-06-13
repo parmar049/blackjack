@@ -10,16 +10,15 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class Card {
-    private Suit suit;
+
     private CardRank rank;
 
     public Card(Card card) {
-        this.suit = card.getSuit();
         this.rank = card.getRank();
     }
 
     public String toString() {
-        return this.suit.toString().concat("-").concat(rank.toString().concat("-").concat(String.valueOf(rank.getValue())));
+        return this.rank.name();
     }
 
 }

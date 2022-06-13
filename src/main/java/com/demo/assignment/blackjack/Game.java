@@ -1,5 +1,6 @@
 package com.demo.assignment.blackjack;
 
+import com.demo.assignment.blackjack.model.GameResult;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.ResourceUtils;
 
@@ -13,22 +14,46 @@ public class Game {
     /**
      * This game is designed to play just one round. It can be modified a bit to play multiple rounds with multiple players
      */
-    public void startGame() {
+    public GameResult startGame() {
         System.out.println("Starting first Round...");
         String fileContent = readInput("classpath:input1.txt");
         CardDeck cardDeck = null;
+        GameResult gameResult = null;
         if (ObjectUtils.isEmpty(fileContent)) {
             System.out.println("Didn't find any input parameters so initializing random deck of 52 cards");
             cardDeck = new CardDeck();
             cardDeck.generateCardDeck();
-            cardDeck.shuffleDeck();
-            System.out.println(cardDeck);
-        } else {
-            // Code to convert readfile in Deck Object
-        }
 
+        } else {
+            String[] cards = fileContent.split(",");
+            cardDeck.generateCardDeck(cards);
+            System.out.println("initializing cards from input file");
+        }
+        cardDeck.shuffleDeck();
+        System.out.println(cardDeck);
         Person dealer = new Person("Dealer");
         Person player = new Person("Sam");
+        /**
+         * Initially 2-2 cards will be drawn from the deck
+         */
+        player.getHand().takeCardFromDeck(cardDeck);
+        dealer.getHand().takeCardFromDeck(cardDeck);
+        player.getHand().takeCardFromDeck(cardDeck);
+        dealer.getHand().takeCardFromDeck(cardDeck);
+
+        if (player.hasBlackjack() || dealer.hasBlackjack()) {
+            /**
+             * If both Player and Dealer has blackJack then also Player is going to win
+             */
+            if (player.getHand().calculateHandValue() >= dealer.getHand().calculateHandValue()) {
+                gameResult = new GameResult(player.getName(), player.getName().concat(" won the game as he has blackJack"));
+            } else {
+                gameResult = new GameResult(dealer.getName(), dealer.getName().concat(" won the game as he has blackJack"));
+            }
+            return gameResult;
+        }
+
+        Continue from here >>>>>>>>>
 
         for (int counter = 0; counter < cardDeck.getDeck().size() - 1; counter++) {
             /*
@@ -86,7 +111,10 @@ public class Game {
             }
 
         }
-
+        System.out.println("Here is the summery of cards :: ");
+        System.out.println(player.getHandToPrint());
+        System.out.println(dealer.getHandToPrint());
+        return gameResult;
 
     }
 

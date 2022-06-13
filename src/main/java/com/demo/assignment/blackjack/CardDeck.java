@@ -20,10 +20,14 @@ public class CardDeck {
     }
 
     public void generateCardDeck() {
-        for (Suit cardSuit : Suit.values()) {
-            for (CardRank cardValue : CardRank.values()) {
-                this.deck.add(new Card(cardSuit, cardValue));
-            }
+        for (CardRank cardValue : CardRank.values()) {
+            this.deck.add(new Card(cardValue));
+        }
+    }
+
+    public void generateCardDeck(String[] cards) {
+        for (String value : cards) {
+            this.deck.add(new Card(CardRank.valueOf(value)));
         }
     }
 
@@ -31,7 +35,7 @@ public class CardDeck {
         Collections.shuffle(deck, new Random());
     }
 
-    public Card takeCard(){
+    public Card takeCard() {
         //Take a copy of the first card from the deck
         Card cardToTake = new Card(deck.get(0));
         //Remove the card from the deck. Index is hardcoded to 0 as we remove the element so next element will be now
