@@ -9,7 +9,7 @@ public class BlackjackApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BlackjackApplication.class, args);
 		System.out.println("Welcome to BlackJack !!");
-		new Game().startGame();
+		new Game().startGame("Sam","classpath:input1.txt");
 	}
 
 }

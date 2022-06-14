@@ -19,7 +19,6 @@ public class Person {
     }
 
     public void printHand(int index) {
-        System.out.println("Printing index : "+ index);
         handToPrint.append(this.hand.getCard(index).toString().concat(", "));
     }
 

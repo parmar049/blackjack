@@ -2,13 +2,11 @@ package com.demo.assignment.blackjack;
 
 import com.demo.assignment.blackjack.enums.Suit;
 import com.demo.assignment.blackjack.enums.CardRank;
+import com.demo.assignment.blackjack.exception.InvalidInputException;
 import com.demo.assignment.blackjack.model.Card;
 import lombok.Getter;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Getter
 public class CardDeck {
@@ -25,9 +23,9 @@ public class CardDeck {
         }
     }
 
-    public void generateCardDeck(String[] cards) {
-        for (String value : cards) {
-            this.deck.add(new Card(CardRank.valueOf(value)));
+    public void generateCardDeck(Set<CardRank> cards) {
+        for (CardRank card : cards) {
+            this.deck.add(new Card(card));
         }
     }
 
@@ -53,5 +51,17 @@ public class CardDeck {
             counter++;
         }
         return cardList.toString();
+    }
+
+    public Set<CardRank> validateCardInput(String[] cards) throws InvalidInputException {
+        Set<CardRank> setOfCards = new LinkedHashSet<>();
+        for (String card : cards) {
+            setOfCards.add(CardRank.valueOf(card.trim()));
+        }
+        if (cards.length != setOfCards.size()) {
+            throw new InvalidInputException("Invalid input. There might be a duplicate card in the input string");
+        }
+
+        return setOfCards;
     }
 }

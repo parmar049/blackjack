@@ -1,5 +1,6 @@
 package com.demo.assignment.blackjack.model;
 
+import com.demo.assignment.blackjack.enums.GameStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,5 +12,6 @@ public class GameResult {
 
     private String winner;
     private String message;
+    private GameStatus status;
 
 }
