@@ -9,17 +9,11 @@ public class Person {
 
     private Hand hand;
     private String name;
-    private StringBuilder handToPrint;
 
     public Person(String name) {
         // Whenever a new player comes to play give them a new hand a name
         this.hand = new Hand();
         this.name = name;
-        this.handToPrint = new StringBuilder(name.concat(" : "));
-    }
-
-    public void printHand(int index) {
-        handToPrint.append(this.hand.getCard(index).toString().concat(", "));
     }
 
     public boolean hasBlackjack() {

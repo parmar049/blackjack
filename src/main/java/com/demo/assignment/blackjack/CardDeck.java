@@ -1,6 +1,6 @@
 package com.demo.assignment.blackjack;
 
-import com.demo.assignment.blackjack.enums.Suit;
+import com.demo.assignment.blackjack.constants.Constants;
 import com.demo.assignment.blackjack.enums.CardRank;
 import com.demo.assignment.blackjack.exception.InvalidInputException;
 import com.demo.assignment.blackjack.model.Card;
@@ -36,11 +36,11 @@ public class CardDeck {
     public Card takeCard() {
         //Take a copy of the first card from the deck
         Card cardToTake = new Card(deck.get(0));
-        //Remove the card from the deck. Index is hardcoded to 0 as we remove the element so next element will be now
-        //on 0th position
+        /**
+         * Remove the card from the deck. Index is hardcoded to 0 as we remove the element so next element will be now on 0th position
+         */
         deck.remove(0);
         return cardToTake;
-
     }
 
     public String toString() {
@@ -59,7 +59,7 @@ public class CardDeck {
             setOfCards.add(CardRank.valueOf(card.trim()));
         }
         if (cards.length != setOfCards.size()) {
-            throw new InvalidInputException("Invalid input. There might be a duplicate card in the input string");
+            throw new InvalidInputException(Constants.INVALID_INPUT_MSG);
         }
 
         return setOfCards;
