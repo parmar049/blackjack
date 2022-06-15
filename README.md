@@ -27,5 +27,11 @@ Use command (**mvn spring-boot:run**) to run application which will execute main
 
 Use command (**mvn clean install**) to run build and unit test
 
+### Testing of random cards
+
+To test your input you can use input files, Ex. there is file main.txt under resoure folder. Change your input according <br />
+to your requirement and run the main method to see the result in console.
+
+
 
 

@@ -48,7 +48,7 @@ public class Game {
         }
         System.out.println(cardDeck);
 
-        Supplier<String> gameSummery = () -> Constants.SUMMERY_MSG.concat(player.getName()).concat(" | ").concat(dealer.getName()).
+        Supplier<String> gameSummery = () -> Constants.SUMMARY_MSG.concat(player.getName()).concat(" | ").concat(dealer.getName()).
                 concat("\n").concat(player.getName()).concat(" :: ").concat(player.getHand().getHandToPrint().toString()).
                 concat("\n").concat(dealer.getName()).concat(" :: ").concat(dealer.getHand().getHandToPrint().toString());
 
@@ -120,6 +120,9 @@ public class Game {
     }
 
     public String readInput(String filePath) {
+        if (filePath == null) {
+            return null;
+        }
         String content = null;
         try {
             File file = ResourceUtils.getFile(filePath);

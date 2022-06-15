@@ -15,6 +15,6 @@ public class Result {
     private String winner;
     private String message;
     private GameStatus status;
-    private Supplier<String> summery;
+    private Supplier<String> summary;
 
 }
