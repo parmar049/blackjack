@@ -1,6 +1,5 @@
 package com.demo.assignment.blackjack.model;
 
-import com.demo.assignment.blackjack.enums.Suit;
 import com.demo.assignment.blackjack.enums.CardRank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
