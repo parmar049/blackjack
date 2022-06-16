@@ -5,12 +5,12 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Person {
+public class Player {
 
     private Hand hand;
     private String name;
 
-    public Person(String name) {
+    public Player(String name) {
         // Whenever a new player comes to play give them a new hand a name
         this.hand = new Hand();
         this.name = name;

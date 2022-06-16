@@ -1,7 +1,7 @@
 package com.demo.assignment.blackjack.Service;
 
 import com.demo.assignment.blackjack.CardDeck;
-import com.demo.assignment.blackjack.Person;
+import com.demo.assignment.blackjack.Player;
 import com.demo.assignment.blackjack.constants.Constants;
 import com.demo.assignment.blackjack.enums.GameStatus;
 import com.demo.assignment.blackjack.exception.InvalidInputException;
@@ -22,8 +22,8 @@ public class BlackJackImpl implements BlackJack{
         CardDeck cardDeck;
         Result gameResult;
         cardDeck = new CardDeck();
-        Person dealer = new Person(Constants.DEALER_NAME);
-        Person player = new Person(playerName);
+        Player dealer = new Player(Constants.DEALER_NAME);
+        Player player = new Player(playerName);
         if (ObjectUtils.isEmpty(fileContent)) {
             System.out.println(Constants.INPUT_MISSING_ERROR);
             cardDeck.generateCardDeck();
