@@ -16,14 +16,18 @@ import java.util.function.Supplier;
 @Service
 public class BlackJackImpl implements BlackJack{
 
+    CardDeck cardDeck;
+    Player dealer;
+    Player player;
+
     @Override
     public Result getWinner(String playerName, String inputFilePath) {
         String fileContent = BlackJackUtil.readInput(inputFilePath);
-        CardDeck cardDeck;
+
         Result gameResult;
         cardDeck = new CardDeck();
-        Player dealer = new Player(Constants.DEALER_NAME);
-        Player player = new Player(playerName);
+        dealer = new Player(Constants.DEALER_NAME);
+        player = new Player(playerName);
         if (ObjectUtils.isEmpty(fileContent)) {
             System.out.println(Constants.INPUT_MISSING_ERROR);
             cardDeck.generateCardDeck();
