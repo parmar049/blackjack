@@ -1,32 +1,33 @@
-package com.demo.assignment.blackjack;
+package com.demo.assignment.blackjack.Service;
 
+import com.demo.assignment.blackjack.CardDeck;
+import com.demo.assignment.blackjack.Player;
 import com.demo.assignment.blackjack.constants.Constants;
 import com.demo.assignment.blackjack.enums.GameStatus;
 import com.demo.assignment.blackjack.exception.InvalidInputException;
 import com.demo.assignment.blackjack.model.Result;
+import com.demo.assignment.blackjack.util.BlackJackUtil;
+import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
-import org.springframework.util.ResourceUtils;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.Set;
 import java.util.function.Supplier;
 
-public class Game {
+@Service
+public class BlackJackImpl implements BlackJack{
 
-    /**
-     * This game is designed to play just one round. It can be modified a bit to play multiple rounds with multiple players
-     */
-    public Result startGame(String playerName, String inputFilePath) {
+    CardDeck cardDeck;
+    Player dealer;
+    Player player;
 
-        String fileContent = readInput(inputFilePath);
-        CardDeck cardDeck;
+    @Override
+    public Result getWinner(String playerName, String inputFilePath) {
+        String fileContent = BlackJackUtil.readInput(inputFilePath);
+
         Result gameResult;
         cardDeck = new CardDeck();
-        Person dealer = new Person(Constants.DEALER_NAME);
-        Person player = new Person(playerName);
+        dealer = new Player(Constants.DEALER_NAME);
+        player = new Player(playerName);
         if (ObjectUtils.isEmpty(fileContent)) {
             System.out.println(Constants.INPUT_MISSING_ERROR);
             cardDeck.generateCardDeck();
@@ -116,23 +117,7 @@ public class Game {
         }
 
         return gameResult;
-
     }
 
-    public String readInput(String filePath) {
-        if (filePath == null) {
-            return null;
-        }
-        String content = null;
-        try {
-            File file = ResourceUtils.getFile(filePath);
-            content = new String(Files.readAllBytes(file.toPath()));
-        } catch (FileNotFoundException e) {
-            System.out.println(Constants.FILE_MISSING_MSG + filePath);
-        } catch (IOException e) {
-            System.out.println(Constants.FILE_READ_MSG + filePath);
-        }
-        return content;
-    }
 
 }

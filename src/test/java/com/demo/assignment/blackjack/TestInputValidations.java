@@ -1,17 +1,29 @@
 package com.demo.assignment.blackjack;
 
+import com.demo.assignment.blackjack.Service.BlackJack;
+import com.demo.assignment.blackjack.Service.BlackJackImpl;
 import com.demo.assignment.blackjack.constants.Constants;
 import com.demo.assignment.blackjack.enums.GameStatus;
 import com.demo.assignment.blackjack.model.Result;
+import com.demo.assignment.blackjack.util.BlackJackUtil;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class TestInputValidations {
+
+    private BlackJack blackJack;
+
+    @BeforeAll
+    void setUp(){
+        blackJack = new BlackJackImpl();
+    }
 
     @Test
     void testFileReading() {
-        Game game = new Game();
-        String data = game.readInput("classpath:inputFiles/InvalidInput.txt");
+        String data = BlackJackUtil.readInput("classpath:inputFiles/InvalidInput.txt");
         Assertions.assertNotNull(data);
     }
 
@@ -20,9 +32,8 @@ public class TestInputValidations {
      */
     @Test
     void testInvalidInput() {
-        Game game = new Game();
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            game.startGame("Karan", "classpath:inputFiles/InvalidInput.txt");
+            blackJack.getWinner("Karan", "classpath:inputFiles/InvalidInput.txt");
         });
     }
 
@@ -31,8 +42,7 @@ public class TestInputValidations {
      */
     @Test
     void testDuplicateCardInput() {
-        Game game = new Game();
-        Result gameResult1 = game.startGame("Karan", "classpath:inputFiles/Input_DuplicateCard.txt");
+        Result gameResult1 = blackJack.getWinner("Karan", "classpath:inputFiles/Input_DuplicateCard.txt");
         Assertions.assertEquals(GameStatus.TERMINATED, gameResult1.getStatus());
         Assertions.assertTrue(gameResult1.getMessage().contains(Constants.INVALID_INPUT_MSG));
     }
